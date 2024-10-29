@@ -1,0 +1,60 @@
+﻿@model User
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Crear Usuario</h2>
+
+            <form asp-action="Create" method="post" class="border p-4 rounded shadow-sm bg-light">
+                <div class="form-group">
+                    <label for="UserName">Nombre de Usuario:</label>
+                    <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Ingresa el nombre de usuario" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Password">Contraseña:</label>
+                    <input type="password" class="form-control" id="Password" name="Password" placeholder="Ingresa la contraseña" required />
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('form').on('submit', function (e) {
+            e.preventDefault(); // Evita el envío por defecto del formulario
+
+            Swal.fire({
+                title: 'Usuario creado con éxito!',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                this.submit(); // Envía el formulario después de la notificación
+            });
+        });
+    });
+</script>
+
+<style>
+    .container {
+        margin-top: 100px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+</style>

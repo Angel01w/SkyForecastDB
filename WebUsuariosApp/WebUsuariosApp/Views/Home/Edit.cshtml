@@ -1,0 +1,77 @@
+﻿@model User
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Editar Usuario</h2>
+
+            <form asp-action="Edit" method="post" class="border p-4 rounded shadow-sm bg-light">
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <div class="form-group">
+                    <label for="UserName">Nombre de Usuario</label>
+                    <input type="text" class="form-control" id="UserName" name="UserName"
+                           value="@Model.UserName" placeholder="Ingrese el nombre de usuario" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Password">Contraseña</label>
+                    <input type="password" class="form-control" id="Password" name="Password"
+                           value="@Model.Password" placeholder="Ingrese la nueva contraseña" required />
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Guardar Cambios</button>
+                </div>
+
+                <div id="spinner" class="spinner-border text-primary mt-3" role="status" style="display: none;">
+                    <span class="sr-only">Cargando...</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('form').on('submit', function (e) {
+            e.preventDefault(); // Evita el envío inmediato del formulario
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Los cambios serán guardados.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, guardar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#spinner').show(); // Mostrar spinner
+                    this.submit(); // Enviar el formulario
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    .container {
+        margin-top: 100px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+</style>
